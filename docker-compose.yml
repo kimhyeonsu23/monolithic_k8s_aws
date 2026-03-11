@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+    backend:
+      image: khs23/inspire-monolithic
+      container_name: monolithic-backend-container
+      ports:
+        - "8888:8888"
+      environment:
+      # DB
+        #SPRING_DATASOURCE_URL: jdbc:mariadb://khs-dbinst.cpoks2mw4cx3.us-west-1.rds.amazonaws.com
+        # RDS(ssl 주의)
+        SPRING_DATASOURCE_URL: jdbc:mariadb://khs-dbinst.cpoks2mw4cx3.us-west-1.rds.amazonaws.com:3306/inspire?useSSL=true&verifyServerCertificate=false
+        SPRING_DATASOURCE_USER: root
+        SPRING_DATASOURCE_PASSWORD: 123456789
+        # JPA
+        SPRING_JPA_HIBERNATE_DDL_AUTO: create
+        SPRING_JAP_SHOW_SQL: true
+        # redis
+        SPRING_REDIS_HOST: redis
+        SPRING_REDIS_PORT: 6379
+      restart: always
+      # depends_on:
+        # RDS 사용시 제거
+        # - database
+    
+    # aws 사용시 제거.
+    # database:
+    #   image: khs23/inspire-mariadb
+    #   container_name: monolithic-mariadb-container
+    #   ports:
+    #     - "6033:3306"
+    #   environment:
+    #     MARIADB_USER: root
+    #     MARIADB_ROOT_PASSWORD: 1234
+    #     MARIADB_DATABASE: inspire
+
+    redis:
+      image: khs23/inspire-redis
+      container_name: monolithic-redis-container
+      ports:
+        - "6379:6379"
+      restart: always
