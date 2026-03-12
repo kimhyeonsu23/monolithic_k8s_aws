@@ -45,5 +45,5 @@ jobs:
           IMAGE_TAG: latest
         # yml파일에서 특정 명령어를 그룹화시킬 때 사용
         run: |
-          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./Dockerfile
+          docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./Dockerfile .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
