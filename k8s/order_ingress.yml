@@ -1,0 +1,28 @@
+# aws nlb -> ingress controller (pod) -> ingress -> service -> pod
+
+apiVersion: networking.k8s.io/v1
+
+kind: Ingress
+metadata:
+  name: order-ingress
+  namespace: lgcns
+  annotations:
+    # kubernetes.io/ingress.class: nginx
+    # nginx.ingress.kubernetes.io/rewrite-target: /$1
+
+spec:
+  ingressClassName: nginx
+  rules:
+  # 레코드로 등록한 도메인 이름
+  - host: server.khsinspire.store
+    http:
+      paths:
+      # http://server.khsinspire.store/
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: order-service  # deployment-service의 이름과 동일 해야 함. (ingress는 pod가 아니라 service를 찾는것)
+            port:
+              number: 80  # ingress 80 -> service 80 -> pod 8888 로 들어가는 구조
+          
