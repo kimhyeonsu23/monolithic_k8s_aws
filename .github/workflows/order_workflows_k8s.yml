@@ -7,7 +7,7 @@ on:
 
 jobs:
   # job의 이름. 자유롭게 줄 수 있음
-  build and deploy:
+  build-and-deploy:
     #runner
     runs-on: ubuntu-latest
 
