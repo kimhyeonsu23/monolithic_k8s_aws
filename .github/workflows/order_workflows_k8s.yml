@@ -18,6 +18,7 @@ jobs:
 
       - name: install kubectl
         uses: azure/setup-kubectl@v3
+        with: "v1.32.2"
 
       # aws와 연결
       - name: aws configure
