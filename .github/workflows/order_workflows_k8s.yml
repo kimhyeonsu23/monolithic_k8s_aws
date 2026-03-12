@@ -47,3 +47,8 @@ jobs:
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./Dockerfile .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+      - name: kubectl apply
+        run: |
+          kubectl apply -f k8s/order_redis.yml -n lgcns
+          kubectl apply -f k8s/order_deployment.yml -n lgcns
