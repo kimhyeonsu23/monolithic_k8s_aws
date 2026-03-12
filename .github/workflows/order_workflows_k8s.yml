@@ -1,6 +1,19 @@
-# name: deploy order
+name: deploy order
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  # job의 이름. 자유롭게 줄 수 있음
+  build and deploy:
+    #runner
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout github # 레포에서 코드 가져와서 러너에 깔아줘
+        # uses: 명령어
+        uses: actions/checkout@v2
+
+      - name: 
