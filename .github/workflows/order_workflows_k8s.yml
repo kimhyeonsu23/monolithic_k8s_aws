@@ -40,9 +40,10 @@ jobs:
       # 이미지 생성/push
       - name: image build and push docker image to ecr
         env:
-          REGISTORY: 414901227428.dkr.ecr.us-west-1.amazonaws.com
+          REGISTRY: 414901227428.dkr.ecr.us-west-1.amazonaws.com
           REPOSITORY: order-khs-backend
           IMAGE_TAG: latest
-        run: | # yml파일에서 특정 명령어를 그룹화시킬 때 사용
+        # yml파일에서 특정 명령어를 그룹화시킬 때 사용
+        run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG -f ./Dockerfile
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
